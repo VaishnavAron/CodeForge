@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@layer utilities {
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  
+  .mask-radial-faded {
+    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 50px -10px rgba(6, 182, 212, 0.35);
+  }
+
+  .glow-violet {
+    box-shadow: 0 0 50px -10px rgba(139, 92, 246, 0.35);
+  }
+
+  .glow-button {
+    box-shadow: 0 0 25px -4px rgba(99, 102, 241, 0.6);
+  }
+}
+
+/* Global Background & Custom modern scrollbar */
+body {
+  background-color: #0b0f17;
+  color: #f8fafc;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0f17;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
