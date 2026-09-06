@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
-import { registerUser, clearAuthError } from "../authSlice";
-import { User, Mail, Lock, Eye, EyeOff, UserPlus, ArrowRight } from "lucide-react";
+import { registerUser, loginUser, clearAuthError } from "../authSlice";
+import { User, Mail, Lock, Eye, EyeOff, UserPlus, ArrowRight, Sparkles } from "lucide-react";
 import { useToast } from "../context/ToastContext";
 
 const formSchema = z.object({
@@ -78,6 +78,28 @@ function Signup() {
             <p className="text-xs text-gray-400 mt-1">
               Join CodeForge to solve algorithm challenges and test in isolated sandboxes.
             </p>
+          </div>
+
+          {/* ⚡ ONE-CLICK RECRUITER DEMO LOGIN */}
+          <div className="mb-6">
+            <button
+              type="button"
+              onClick={() => dispatch(loginUser({ emailId: "demo@codeforge.com", password: "DemoUser@2026!" }))}
+              disabled={loading}
+              className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500/20 via-indigo-500/20 to-purple-500/20 hover:from-cyan-500/30 hover:to-purple-500/30 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-semibold flex items-center justify-center gap-2 shadow-[0_0_20px_-3px_rgba(6,182,212,0.25)] hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] transition-all cursor-pointer group"
+            >
+              <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse group-hover:scale-110 transition-transform" />
+              <span>⚡ One-Click Recruiter Demo Login</span>
+              <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+            </button>
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/10" />
+              </div>
+              <div className="relative flex justify-center text-[10px] uppercase font-mono tracking-wider">
+                <span className="bg-[#0b101b] px-2 text-gray-400">or register with email</span>
+              </div>
+            </div>
           </div>
 
           {/* Global Error Banner */}

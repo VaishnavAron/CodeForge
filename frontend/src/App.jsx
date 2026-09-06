@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import AdminPanel from "./pages/AdminPanel";
 import ProblemPage from "./pages/ProblemPage";
 import PremiumPage from "./pages/PremiumPage";
+import Footer from "./components/Footer";
 import { checkAuth } from "./authSlice";
 
 function App() {
@@ -66,6 +67,9 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+
+      {/* Global Application Footer */}
+      <Footer />
     </div>
   );
 }
