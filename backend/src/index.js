@@ -72,11 +72,18 @@ const InitalizeConnection=async()=>{
       console.log("Tip: Ensure 0.0.0.0/0 is whitelisted in MongoDB Atlas Network Access.");
     }
 
-    app.listen(process.env.PORT || 7000, () => {
+    return app.listen(process.env.PORT || 7000, () => {
       console.log("server listening at port number:" + (process.env.PORT || 7000));
     });
 }
-InitalizeConnection();
+
+// Only start the server when run directly (node src/index.js),
+// not when imported by automated test suites (supertest)
+if (require.main === module) {
+  InitalizeConnection();
+}
+
+module.exports = app;
 
 
 // main()

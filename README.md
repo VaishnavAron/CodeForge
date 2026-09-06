@@ -1,5 +1,6 @@
 # ⚡ CodeForge — Next-Generation DSA & Socratic AI Coding Platform
 
+[![CI Test Suite](https://github.com/VaishnavAron/CodeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/VaishnavAron/CodeForge/actions/workflows/ci.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC.svg)](https://tailwindcss.com/)
