@@ -40,6 +40,16 @@ app.use(cors({
 app.use(express.json());
 app.use(CookieParser());
 
+// Lightweight health-check endpoint for uptime monitoring (cron-job.org / UptimeRobot)
+app.get(['/health', '/api/health'], (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'CodeForge Backend API',
+    uptime: Math.floor(process.uptime()),
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.use('/user',authRouter);
 app.use('/problem',problemRouter);
 app.use('/submission',submitRouter);
