@@ -5,7 +5,13 @@ const redisClient=require("../config/redis")
 
 const adminmiddleware=async(req,res,next)=>{
       try{
-        const{token}=req.cookies;
+        let token = req.cookies?.token;
+        if (!token && req.headers.authorization) {
+          const parts = req.headers.authorization.split(' ');
+          if (parts.length === 2 && parts[0] === 'Bearer') {
+            token = parts[1];
+          }
+        }
         if(!token)
             throw new Error("token is not present ");
         const payload=jwt.verify(token,process.env.JWT_KEY)

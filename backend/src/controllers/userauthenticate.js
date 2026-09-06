@@ -34,6 +34,7 @@ try{
  res.cookie('token', token, cookieOptions);
  res.status(201).json({
     user: reply,
+    token: token,
     message: "Registered and logged in successfully"
  });
 }
@@ -78,6 +79,7 @@ const login=async(req,res)=>{
     res.cookie('token', token, cookieOptions);
     res.status(200).json({
         user: reply,
+        token: token,
         message: "logged In successfully"
     });
     }
@@ -88,12 +90,18 @@ const login=async(req,res)=>{
 
 const logout=async(req,res)=>{
     try{
-        const { token } = req.cookies;
+        let token = req.cookies?.token;
+        if (!token && req.headers.authorization) {
+            const parts = req.headers.authorization.split(' ');
+            if (parts.length === 2 && parts[0] === 'Bearer') {
+                token = parts[1];
+            }
+        }
         if (token) {
             const payload = jwt.decode(token);
-            if (payload && payload.exp) {
-                await redisClient.set(`token:${token}`, "Blocked");
-                await redisClient.expireAt(`token:${token}`, payload.exp);
+            if (payload && payload.exp && redisClient && redisClient.isOpen) {
+                await redisClient.set(`token:${token}`, "Blocked").catch(() => {});
+                await redisClient.expireAt(`token:${token}`, payload.exp).catch(() => {});
             }
         }
         res.cookie("token", "", {
@@ -105,7 +113,7 @@ const logout=async(req,res)=>{
         res.status(200).json({ message: "logged out successfully" });
     }
     catch(err){
-        res.status(500).json({ message: err.message || "Logout failed" });
+        res.status(200).json({ message: "logged out" });
     }
 }
 

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../authSlice";
+import { loginUser, clearAuthError } from "../authSlice";
 import { useNavigate, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, LogIn, ArrowRight, Sparkles } from "lucide-react";
@@ -19,6 +19,10 @@ function Login() {
   const navigate = useNavigate();
   const toast = useToast();
   const { isAuthenticated, loading, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(clearAuthError());
+  }, [dispatch]);
 
   const {
     register,

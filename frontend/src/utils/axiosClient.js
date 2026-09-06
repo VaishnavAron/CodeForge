@@ -8,4 +8,13 @@ const axiosClient = axios.create({
   }
 });
 
+// Automatically attach Bearer token for cross-origin authentication
+axiosClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem("cf_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 export default axiosClient;

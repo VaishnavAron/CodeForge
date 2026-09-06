@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
-import { registerUser } from "../authSlice";
+import { registerUser, clearAuthError } from "../authSlice";
 import { User, Mail, Lock, Eye, EyeOff, UserPlus, ArrowRight } from "lucide-react";
 import { useToast } from "../context/ToastContext";
 
@@ -21,6 +21,10 @@ function Signup() {
   const navigate = useNavigate();
   const toast = useToast();
   const { isAuthenticated, loading, error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(clearAuthError());
+  }, [dispatch]);
 
   const {
     register,
